@@ -9,7 +9,12 @@ module.exports = {
     urlPage:(req, res)=>{
         var request = require("request");
         request("https://data.sfgov.org/resource/wwmu-gmzc.json", function(error, response, body) {
-            console.log(response);
+            let json_data =  JSON.parse(response.body);
+
+            for(let i in json_data){
+                console.log(json_data[i].fun_facts);
+                console.log("____________________________________________________");
+            }
         }); 
        return res.view('urlPage');
     }
