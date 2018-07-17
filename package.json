@@ -9,8 +9,10 @@
     "@sailshq/lodash": "^3.10.3",
     "@sailshq/socket.io-redis": "^5.2.0",
     "async": "2.0.1",
+    "fast-csv": "^2.4.1",
     "geocoder": "^0.2.3",
     "grunt": "1.0.1",
+    "mysql": "^2.11.1",
     "node-geocoder": "^3.22.0",
     "nodemon": "^1.18.2",
     "request": "^2.87.0",
@@ -20,7 +22,8 @@
     "sails-hook-orm": "^2.0.0-16",
     "sails-hook-sockets": "^1.4.0",
     "sails-mysql": "^1.0.0",
-    "sails-service-location": "^3.3.1"
+    "sails-service-location": "^3.3.1",
+    "skipper-csv": "0.0.1"
   },
   "devDependencies": {
     "@sailshq/eslint": "^4.19.3"

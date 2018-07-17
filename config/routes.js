@@ -28,6 +28,7 @@ module.exports.routes = {
     view: 'pages/homepage'
   },
   'GET /urlPage/':'GetDataFromURLController.urlPage',
+  'GET /search/' : 'GetDataFromURLController.search',
 
   /***************************************************************************
   *                                                                          *

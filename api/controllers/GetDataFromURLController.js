@@ -1,21 +1,15 @@
-/**
- * GetDataFromURLController
- *
- * @description :: Server-side actions for handling incoming requests.
- * @help        :: See https://sailsjs.com/docs/concepts/actions
- */
 var NodeGeocoder = require('node-geocoder');
 module.exports = {
-    urlPage:(req, res)=>{
+    urlPage:(res)=>{
         var request = require("request");
         request("https://data.sfgov.org/resource/wwmu-gmzc.json", function(error, response) {
             let json_data =  JSON.parse(response.body);
             var options = {
                 provider: 'google',
                 // Optional depending on the providers
-                httpAdapter: 'https', // Default
-                apiKey: 'AIzaSyBJn9YoTvEO_7o8JcfO33ZT8kWMy9P_IVs ', // for Mapquest, OpenCage, Google Premier
-                formatter: null         // 'gpx', 'string', ...
+                httpAdapter: 'https',
+                apiKey: 'AIzaSyBJn9YoTvEO_7o8JcfO33ZT8kWMy9P_IVs ',
+                formatter: null
             };
             var geocoder = NodeGeocoder(options);
             for(let i in json_data){
@@ -37,7 +31,21 @@ module.exports = {
                 }
             }
         }); 
-       return res.view('urlPage');
+
+       
+    },
+    search: async(req, res) =>{
+        let category = req.param('category');
+        let q = req.param('search_box');
+        console.log(category); //actor_1
+        console.log(q); //john
+        
+        let qry = "SELECT DISTINCT * from getdatafromurl WHERE "+`${category}`+" LIKE '%"+`${q}`+"%'";
+        console.log(qry);
+        let data = await GetDataFromURL.getDatastore().sendNativeQuery(qry);
+            
+        console.log("Data = ",data);
+        return res.view('search');
     }
 };
 
