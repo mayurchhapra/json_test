@@ -1,6 +1,7 @@
 var NodeGeocoder = require('node-geocoder');
 module.exports = {
-    urlPage:(res)=>{
+    urlPage:(req, res)=>{
+        
         var request = require("request");
         request("https://data.sfgov.org/resource/wwmu-gmzc.json", function(error, response) {
             let json_data =  JSON.parse(response.body);
@@ -31,21 +32,19 @@ module.exports = {
                 }
             }
         }); 
-
-       
+        
+        return res.view('urlPage');
     },
     search: async(req, res) =>{
         let category = req.param('category');
         let q = req.param('search_box');
-        console.log(category); //actor_1
-        console.log(q); //john
-        
-        let qry = "SELECT DISTINCT * from getdatafromurl WHERE "+`${category}`+" LIKE '%"+`${q}`+"%'";
-        console.log(qry);
-        let data = await GetDataFromURL.getDatastore().sendNativeQuery(qry);
-            
-        console.log("Data = ",data);
-        return res.view('search');
+        let data = {};
+        let dataSet = {};
+        if(category !== undefined){
+            data[category] = { 'like': '%'+q+'%'};    
+            dataSet = await GetDataFromURL.find(data);
+        }
+        return res.view('search',{dataSet:dataSet});
     }
 };
 

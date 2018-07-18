@@ -1,14 +1,87 @@
-<form>
-    <select name="category">
-        <option value="actor_1">Actor 1</option>
-        <option value="actor_2">Actor 2</option>
-        <option value="actor_3">Actor 3</option>
-        <option value="director">Director</option>
-        <option value="locations">Locations</option>
-        <option value="production_company">Production Company</option>
-        <option value="title">Title</option>
-        <option value="writer">Writer</option>
-    </select>
-    <input type="text" name='search_box' />
-    <input type="submit" value="Search" />
-</form>
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <form class="form-group">
+                <div class="col-md-3">
+                    <select name="category" class="form-control form-control-lg">
+                        <option value="actor_1">Actor 1</option>
+                        <option value="actor_2">Actor 2</option>
+                        <option value="actor_3">Actor 3</option>
+                        <option value="director">Director</option>
+                        <option value="locations">Locations</option>
+                        <option value="production_company">Production Company</option>
+                        <option value="title">Title</option>
+                        <option value="writer">Writer</option>
+                    </select>
+                </div>
+                <div class="col-md-7">
+                    <div>
+                        <input type="text" class='form-control' name='search_box' placeholder="Enter Text"/>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" class="btn btn-success" value="Search"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<% if (dataSet.length > 0) {%>
+    
+
+<div id="map" style="width:100%;height:500px"></div>
+
+<script>
+function myMap() {
+  var myCenter = new google.maps.LatLng(51.508742,-0.120850);
+  var mapCanvas = document.getElementById("map");
+  var mapOptions = {center: myCenter, zoom: 5};
+  var map = new google.maps.Map(mapCanvas, mapOptions);
+  var marker = new google.maps.Marker({position:myCenter});
+  marker.setMap(map);
+}
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbY1YSNc9sbQINlroNu-g427z_E690O3w&callback=myMap"></script>
+
+
+<div class="container">
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Actor_1</th>
+            <th>Actor_2</th>
+            <th>Actor_3</th>
+            <th>Director</th>
+            <th>Locations</th>
+            <th>Lat</th>
+            <th>Lng</th>
+            <th>Production_company</th>
+            <th>Release_year</th>
+            <th>Title</th>
+            <th>Writer</th>
+        </tr>
+        
+            <% for(let i=0; i<dataSet.length; i++) {%>
+            <tr>
+                <td><%= dataSet[i].id %></td>
+                <td><%= dataSet[i].actor_1 %></td>
+                <td><%= dataSet[i].actor_2 %></td>
+                <td><%= dataSet[i].actor_3 %></td>
+                <td><%= dataSet[i].director %></td>
+                <td><%= dataSet[i].locations %></td>
+                <td><%= dataSet[i].lat %></td>
+                <td><%= dataSet[i].lng %></td>
+                <td><%= dataSet[i].production_company %></td>
+                <td><%= dataSet[i].release_year %></td>
+                <td><%= dataSet[i].title %></td>
+                <td><%= dataSet[i].writer %></td>
+            </tr>
+        
+        <%}%>
+    </table>
+</div>
+    <%} else {%>
+        <h2 class="alert denger">No data Found.</h2>
+    <%}%>
+
