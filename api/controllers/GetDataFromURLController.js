@@ -40,11 +40,23 @@ module.exports = {
         let q = req.param('search_box');
         let data = {};
         let dataSet = {};
+        let singleDataMultipleLocations = {};
         if(category !== undefined){
             data[category] = { 'like': '%'+q+'%'};    
             dataSet = await GetDataFromURL.find(data);
         }
+        for(let i=0;i<dataSet.length; i++){
+            for(let j=0; j,dataSet.length; j++){
+                // if(){
+
+                // }
+            }
+        }
         return res.view('search',{dataSet:dataSet});
+    },
+    getSearchResults: async(req, res) =>{
+        let data = req.param('search_box');
+        console.log();
     }
 };
 

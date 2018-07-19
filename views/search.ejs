@@ -35,7 +35,7 @@
     console.log(data.length);
     for(let i = 0; i<data.length; i++){
         locations_array.push(
-            ["<b>Location: </b>"+data[i].locations,data[i].lat, data[i].lng,"<b>Title:</b> "+data[i].title,"<b>Production Company: </b>"+data[i].production_company]
+            ["<h4><b>Location: </b>"+data[i].locations,data[i].lat, data[i].lng,data[i].title,"<b>Production Company: </b>"+data[i].production_company+"</h4>"]
         );
     }
     
@@ -51,11 +51,12 @@
         });
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
             return function() {
-                infowindow.setContent(locations_array[i][0]+"<br>"+locations_array[i][3]+"<br>"+locations_array[i][4]);
+                infowindow.setContent("<div class='alert alert-success'>"+"<h2>"+locations_array[i][3]+"</h2>"+locations_array[i][0]+"<br>"+locations_array[i][4]+"</div>");
                 infowindow.open(map, marker);
             }
         })(marker, i));
     }
+
 </script>
  
 <% if (dataSet.length > 0) {%>
@@ -92,7 +93,6 @@
                 <td><%= dataSet[i].title %></td>
                 <td><%= dataSet[i].writer %></td>
             </tr>
-        
         <%}%>
     </table>
 </div>
