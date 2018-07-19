@@ -18,7 +18,7 @@ module.exports = {
                     // Using callback
                     geocoder.geocode(json_data[i].locations, async function(err, res) {
                         try{
-                            if(res.length > 0 && res[0] !== undefined){
+                            if(res && res.length > 0 && res[0] !== undefined){
                                 let obj = Object.assign(json_data[i],{'lat':res[0].latitude, 'lng':res[0].longitude});
                                 let data = await GetDataFromURL.create(obj);
                                 console.log(obj);
